@@ -1,0 +1,207 @@
+
+<!--  -->
+
+
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Line Charts <a href="/my_linecharts" class="btn btn-primary btn-lg" role="button">Add Total Income</a>
+                    <span style="float:right;">ေရာင္းအားစာရင္းျပ ဇယား</span>
+                    </h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                                   List of Types
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+
+                                 
+                                <div class="col-lg-12">
+                                    
+                  
+                                    <div class="col-md-12">
+
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+
+                                          <li class="list-group-item" id="mymonth">Jan</li>
+                                          <% @line_chart_jans.each do |line_chart_jan| %>
+                                            <% (1..line_chart_jan.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                  <li class="list-group-item" style="background:green;"></li>
+                                            <% end %>
+                                          <% end %>
+                                              
+                                        </ul>
+                                      </div>
+
+
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                         
+                                         <li class="list-group-item" id="mymonth">Feb</li>
+                                         <% @line_chart_febs.each do |line_chart_feb| %>
+                                          <% (1..line_chart_feb.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+                                           
+                                        </ul>
+                                      </div>
+
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                         
+                                         <li class="list-group-item" id="mymonth">Mar</li>
+                                         <% @line_chart_mars.each do |line_chart_mar| %>
+                                          <% (1..line_chart_mar.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+                                           
+                                        </ul>
+                                      </div>
+
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                              
+                                        <li class="list-group-item" id="mymonth">Apr</li>
+                                         <% @line_chart_aprs.each do |line_chart_apr| %>
+                                          <% (1..line_chart_apr.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+
+                                        </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                             
+                                        <li class="list-group-item" id="mymonth">May</li>
+                                         <% @line_chart_mays.each do |line_chart_may| %>
+                                          <% (1..line_chart_may.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+
+                                        </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+
+                                        <li class="list-group-item" id="mymonth">Jun</li>
+                                         <% @line_chart_juns.each do |line_chart_jun| %>
+                                          <% (1..line_chart_jun.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+
+                                        </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                        <li class="list-group-item" id="mymonth">Jul</li>
+                                         <% @line_chart_juls.each do |line_chart_jul| %>
+                                          <% (1..line_chart_jul.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+                                        </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                        <li class="list-group-item" id="mymonth">Aug</li>
+                                         <% @line_chart_augs.each do |line_chart_aug| %>
+                                          <% (1..line_chart_aug.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+                                        </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                        <li class="list-group-item" id="mymonth">Sep</li>
+                                         <% @line_chart_seps.each do |line_chart_sep| %>
+                                          <% (1..line_chart_sep.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+                                        </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                        <li class="list-group-item" id="mymonth">Oct</li>
+                                         <% @line_chart_octs.each do |line_chart_oct| %>
+                                          <% (1..line_chart_oct.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+                                        </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                        <li class="list-group-item" id="mymonth">Nov</li>
+                                         <% @line_chart_novs.each do |line_chart_nov| %>
+                                          <% (1..line_chart_nov.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>                                        
+                                         </ul>
+                                      </div>
+                                      <div class="col-md-1">                          
+                                        <ul class="list-group">
+                                          <li class="list-group-item" id="mymonth">Dec</li>
+                                         <% @line_chart_decs.each do |line_chart_dec| %>
+                                          <% (1..line_chart_dec.total_income.gsub(/00/, '').to_i).each do |i| %>
+                                                <li class="list-group-item" style="background:green;"></li>
+                                          <% end %>
+                                         <% end %>
+                                        </ul>
+                                      </div>
+                                      
+                                    </div>
+
+                              
+
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+
+<style>
+
+.col-md-1{
+    height: 300px;
+    position: relative;
+
+ 
+
+}
+
+#mymonth{
+    background-color: #f5f5f5;
+
+   
+   
+}
+</style>

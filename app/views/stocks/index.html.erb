@@ -1,0 +1,113 @@
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Stock Control
+                    <%= link_to "Find Stock", find_stock_path, :class =>"btn btn-primary btn-lg" %>
+                    <%= link_to 'New Stock', new_stock_path, :class =>"btn btn-default btn-lg" %>
+                    <span style="float:right;">ကုန္ပစၥည္း စာရင္း</span>
+                    </h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            List of Stock
+                            <span id="notice" style="color:red;">Message::<%= notice %></span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    
+                                      <h1>Lists of Stock</h1>
+
+                                      <table class="table table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th>Brand</th>
+                                            <th>Type</th>
+                                            <th>Count</th>
+                                            <th>Retail price</th>
+                                            <th>Wholesale price</th>
+                                            <th>ဝယ္ေစ်း</th>
+                                            <th colspan="3"></th>
+                                          </tr>
+                                        </thead>
+
+                                        <tbody>
+                                          <% @stocks.each do |stock| %>
+                                            <tr>
+                                              <td><%= stock.brand rescue "-"%></td>
+                                              <td><%= stock.type.name rescue "-" %></td>
+                                              <td><%= stock.number_of_item %></td>
+                                              <td><%= stock.item_price %></td>
+                                              <td><%= stock.wholesale_price %></td>
+                                              <td><%= stock.purchase_price %></td>
+                                            
+                                              <td><%= link_to 'Show', stock %></td>
+                                              <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
+                                              <td><%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                            </tr>
+                                          <% end %>
+                                        </tbody>
+                                      </table>
+
+                                      <h1 class="page-header">
+                                          <span style="float:right;">
+                                            <%= link_to "Sync with Factory", get_data_path, :class =>"btn btn-primary btn-lg" %>
+                                          </span>
+                                          <span>စက္ရံုမွေပးပို႕လာေသာ စာရင္း</span>
+                                      </h1>
+                                     <table class="table table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th>Brand</th>
+                                            <th>Type</th>
+                                            <th>Count</th>
+                                            <th>Pricing</th>
+                                            <th colspan="3"></th>
+                                          </tr>
+                                        </thead>
+
+                                        <tbody>
+                                          <% @stocks_fact.each do |stock_fact| %>
+                                            <tr>
+                                              <td><%= stock_fact.brand %></td>
+                                              <td><%= stock_fact.fact_type rescue "-" %></td>
+                                              <td><%= stock_fact.number_of_item %></td>
+                                              <td><%= stock_fact.pricing %></td>
+                                            
+                                              <td><%= link_to 'Show', stock_fact %></td>
+                                              <td><%= link_to 'Edit', edit_stock_path(stock_fact) %></td>
+                                              <td><%= link_to 'Destroy', stock_fact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                            </tr>
+                                          <% end %>
+                                        </tbody>
+                                      </table>
+
+                                      <br>
+
+                     
+
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+

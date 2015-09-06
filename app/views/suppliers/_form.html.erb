@@ -1,0 +1,30 @@
+<%= form_for(@supplier) do |f| %>
+  <% if @supplier.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+
+      <ul>
+      <% @supplier.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label>အမည္</label><br>
+    <%= f.text_field :name, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <label>ဆက္သြယ္ရန္</label><br>
+    <%= f.text_area :contact, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <label>ေပးရန္ရွိ</label><br>
+    <%= f.text_field :debit, :class =>"form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit", :class =>"btn btn-default" %>
+  </div>
+<% end %>

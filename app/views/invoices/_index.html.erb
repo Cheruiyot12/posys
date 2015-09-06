@@ -1,0 +1,330 @@
+<div class="container">
+  <br/><br/><br/>
+  <table class="table table-bordered" id="in_table">
+  <tr>
+    <td>
+      <span class="print_field">ေဘာက္ခ်ာနံပါတ္</span>
+    </td>
+    <td>
+      <input class="form-control" placeholder="Invoice Number" id="in_num" onkeyup="insertInNUMFunction()" value="<%=  Time.now.strftime("%B-%d-") %>aok" >
+    </td> 
+    <td>
+        <span class="print_field">ရက္စြဲ</span>
+    </td>
+    <td>
+        <input class="form-control" value="<%=  Time.now.strftime("%d-%B-%Y") %>" >
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+      <span class="print_field">ဝယ္သူအမည္ 
+      <%= link_to( image_tag("add_user.png"), new_customer_path, :id => "add_cus") %>
+      </span>
+    </td>
+    <td>
+        <input class="form-control" id="cus_name" >
+    </td> 
+    <td>
+       <span class="print_field"> ဖုန္းနံပါတ္</span>
+    </td>
+    <td>
+      <span>
+        <input class="form-control" placeholder="Phone Number" id="ph_number" onkeyup="insertPhNUMFunction()">
+       </span>
+    </td>
+  </tr>
+</table>
+
+<% @customers.each do |customer| %>
+    <div id="customer_<%= customer.name %>" class="money" style="display:none;">
+
+        ေပးရန္ရွိ ေငြ<input type="text" class="form-control" placeholder=".col-xs-2" value="<%= customer.to_give %>" disabled> <br/>
+    
+         ရရန္ရွိ ေငြ <input type="text" class="form-control" placeholder=".col-xs-2" value="<%= customer.to_get %>" disabled>
+     </div>
+                                       
+ <% end %>
+
+</div>
+
+
+ 
+
+<div class="container">
+ 
+    <table class="table table-bordered" id="in_table">
+      <thead>
+        <tr>
+          <th>စဥ္</th>
+          <th>အမ်ိဳးအမည္</th>
+          <th>ဦးေရ</th>
+          <th>ႏႈန္း</th>
+          <th>သင့္ေငြ</th>
+          <th  style="display:none;"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @invoices.each do |invoice| %>
+          <tr id="list_table" class="tablerow">
+             <form accept-charset="UTF-8" action="/invoices" class="new_invoice" id="<%= invoice.id %>" method="post" name="new_invoice" remote="true">
+                   <td >
+                   </td>
+                    
+                   <td>
+                       <input class="form-control" id="invoice_purchaseitem" name="invoice[purchase_item]" type="text" value="<%= invoice.purchase_item %>" disabled style="display:none;">
+                       <p><%= invoice.purchase_item %></p>
+
+                    
+                    </td>
+
+                    <td>
+                        <div style="display:none;">
+                        <input class="form-control" id="invoice_invoice_number" name="invoice[invoice_number]" type="text" value="<%=  Time.now.strftime("%y%m%d%I%M%S") %>">
+
+                        <input class="form-control" name="invoice[customer_name]" type="text" value="<%= invoice.customer_name %>" id="customer_name">
+                     
+                        <input class="form-control" id="invoice_phone_number<%= invoice.id %>" name="invoice[phone_number]" type="text">
+
+
+                        <input class="form-control" id="invoice_payment_type<%= invoice.id %>" name="invoice[payment_type]" type="text" value="CASH">
+                        </div>
+
+                         <input class="form-control" id="invoice_count" name="invoice[count]" type="text" disabled value="<%= invoice.count %>" style="display:none;">
+                          <p><%= invoice.count %></p>
+
+                    </td>
+                        
+                    <td>
+                          <p><%= invoice.item_price.to_i %></p>
+                    </td>
+                    <td>
+                          <input class="form-control" id="invoice_item_price<%= invoice.count.to_i*invoice.item_price.to_i %>" name="invoice[item_price]" type="text" disabled value="<%= invoice.count.to_i*invoice.item_price.to_i %>" style="display:none;">
+                            <p><%= invoice.count.to_i*invoice.item_price.to_i %></p>
+                    </td>
+                   
+             </form>
+          </tr>
+        <% end %>
+             
+      </tbody>
+    </table>
+
+</div>
+
+<div class="container">
+ <table  class="table table-bordered" id="in_table">
+  <tr>
+    <td>
+      <span>
+        <button type="button" id="calculate_price" class="btn btn-default">
+        Calculate</button>
+      </span>
+    </td>
+
+    <td>
+       <select id="p_type" onchange="insertPayFunction()">
+        <option value="choose">ေငြေပးေခ်မႈပုံစံ</option>
+        <option value="လက္ငင္း">CASH (လက္ငင္း)</option>
+        <option value="အေႂကြး">DEBIT (အေႂကြး)</option>
+       </select><input class="form-control" id="cus_pay" >
+    </td>
+
+
+    <td>
+       <span class="print_field">စုစုေပါင္း</span>
+    </td>
+
+    <td>
+       <input id="PicExtPrice" ></input>
+    </td>
+
+  </tr>
+ </table>
+
+
+
+<hr/>
+<div id="twobtn_invoice">
+ <button type="submit" class="btn btn-primary btn-lg" id="submit_invoice"/ >Submit</button>
+  <button type="button" class="btn btn-default btn-lg" id="print_invoice"/ >Print</button>
+</div>      
+</div>
+
+
+<script type="text/javascript">
+ 
+
+  function insertPhNUMFunction()   {
+
+     <% @invoices.each do |invoice| %> 
+
+      document.getElementById("invoice_phone_number<%= invoice.id %>").value = 
+      document.getElementById("ph_number").value;
+    
+     <% end %>
+
+  }
+
+  function insertPayFunction()   {
+
+      <% @invoices.each do |invoice| %>
+    
+       document.getElementById("invoice_payment_type<%= invoice.id %>").value = document.getElementById("p_type").options[document.getElementById("p_type").selectedIndex].value; 
+    
+      <% end %>
+
+  }     
+
+
+ </script>
+
+ <script type="text/javascript">
+          
+    $('#calculate_price').on('click', function () {
+            
+        var total = 0;
+        <% @invoices.each do |invoice| %> 
+            
+            var item_price = document.getElementById("invoice_item_price<%= invoice.count.to_i*invoice.item_price.to_i %>").value;
+
+            total = parseInt(item_price) + parseInt(total);
+            document.getElementById("PicExtPrice").value = total;
+           
+        <% end %>
+
+    });
+
+</script>
+
+ <script type="text/javascript">
+
+    $('#p_type').change(function(){
+             
+             document.getElementById('cus_pay').value = $(this).val();
+              
+    })
+
+ </script>
+ 
+
+ <script type="text/javascript">
+
+    window.onload = function () {
+
+         document.getElementById('cus_name').value  = document.getElementById('customer_name').value 
+
+
+         $('.tablerow').each(function (i) {
+              $("td:first", this).html(i + 1);
+          });
+    };
+
+
+ </script>
+
+
+<style>
+
+.in_field{
+
+  position: relative;
+  bottom: 6px;
+
+}
+
+
+
+.in_field_2{
+
+   position: relative;
+  bottom: 25px;
+
+}
+
+.in_field_div{
+
+     position: relative;
+  bottom: 20px;
+
+}
+
+.money{
+  padding-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.in_field_pay{
+
+  position: relative;
+  bottom: 10px;
+}
+
+
+
+#cus_pay{
+  display: none;
+  position: relative;
+top: 20px;
+margin-bottom: 20px;
+
+}
+
+#vc_no{
+  position: relative;
+  top: -1px;
+  left: 75px;
+}
+
+#vc_date{
+    position: relative;
+    top: -1px;
+    left: 15px;
+}
+
+
+
+
+#in_phone{
+    position: relative;
+    top: 1px;
+    left: 65px;
+
+
+}
+
+
+
+body{
+  font-size:12px;
+}
+
+#in_table{
+   font-size:10px;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+padding: 5px;
+line-height: 1.42857143;
+vertical-align: top;
+border-top: 1px solid #ddd;
+}
+
+
+#print_invoice{
+  color: black;
+}
+
+
+.print_field{
+
+  position: relative;
+  top: 10px;
+
+}
+</style>
+
+
+

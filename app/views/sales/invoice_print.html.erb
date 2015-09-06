@@ -1,0 +1,84 @@
+<a  class="btn btn-default btn-xs" href="/sales"><- Back</a>
+<br/><br/>
+<h4 class="modal-title" id="myModalLabel" style="text-align:center;">ေ႐ႊဇင္​​ေယာ္​ ​<span style="font-size:12px;">ေရာင္​းဝယ္​​ေရး</span><br/>
+</h4>    
+<p style="text-align:center;font-size:12px;">​
+    ေစ်းအေနာက္ေျမာက္ေထာင့္၊ျပည့္သူေစ်း(၂)၊ေပ်ာ္ဘြယ္ျမိဳ႕။
+    ၀၉ ၄၀၂၅၂၄၇၈၈၊
+    ၀၉ ၄၀၂၅၂၄၇၇၄၊
+	၀၉ ၇၉၆၂၂၂၀၀၄
+</p>
+
+<%= render 'invoices/index' %>
+
+
+
+ <script type="text/javascript">
+ <% @invoices.each do |invoice| %>
+      $("#print_invoice").click(function(){
+
+          $.ajax({
+                  url: "/invoices/" + "<%= invoice.id %>",
+                  type: "delete",
+                  dataType: "json"
+             });
+
+         $.ajax({
+                  type: "POST",
+                  url: "/invoices",
+                  data: { invoice: { 
+
+                    invoice_status: "bok", 
+                    sale_id: "<%= invoice.sale_id %>",
+                    purchase_item: "<%= invoice.purchase_item %>",
+                    count: "<%= invoice.count %>",
+                    invoice_number: "<%=  Time.now.strftime('%y%m%d%I%M%S') %>",
+                    item_price:"<%= invoice.count.to_i*invoice.item_price.to_i %>",
+                    customer_name: document.getElementById("customer_name").value,
+                    phone_number: document.getElementById("ph_number").value,
+                    payment_type: document.getElementById("p_type").options[document.getElementById("p_type").selectedIndex].value
+
+
+
+                  }}
+                });  
+
+            $("#add_cus").hide();
+			window.print();        
+        });
+
+
+      $("#submit_invoice").click(function(){
+
+          $.ajax({
+                  url: "/invoices/" + "<%= invoice.id %>",
+                  type: "delete",
+                  dataType: "json"
+             });
+
+         $.ajax({
+                  type: "POST",
+                  url: "/invoices",
+                  data: { invoice: { 
+
+                    invoice_status: "bok", 
+                    sale_id: "<%= invoice.sale_id %>",
+                    purchase_item: "<%= invoice.purchase_item %>",
+                    count: "<%= invoice.count %>",
+                    invoice_number: "<%=  Time.now.strftime('%y%m%d%I%M%S') %>",
+                    item_price:"<%= invoice.count.to_i*invoice.item_price.to_i %>",
+                    customer_name: document.getElementById("customer_name").value,
+                    phone_number: document.getElementById("ph_number").value,
+                    payment_type: document.getElementById("p_type").options[document.getElementById("p_type").selectedIndex].value
+
+
+
+                  }}
+                });  
+
+                location.reload();       
+        });
+
+ <% end %>
+
+    </script>

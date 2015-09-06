@@ -1,0 +1,48 @@
+
+
+<%= form_for(@stock) do |f| %>
+  <% if @stock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+
+      <ul>
+      <% @stock.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :brand %><br>
+    <%= f.text_field :brand, :class =>"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :type_id %><br>
+     <%= f.select :type_id, options_for_select(@type_list,@stock.type_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :number_of_item %><br>
+    <%= f.text_field :number_of_item, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :purchase_price %><br>
+    <%= f.text_field :purchase_price, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :wholesale_price %><br>
+    <%= f.text_field :wholesale_price, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Retail price</label><br>
+    <%= f.text_field :item_price, :class =>"form-control" %>
+  </div>
+
+
+
+  
+  <div class="actions">
+    <%= f.submit :class =>"btn btn-default" %>
+  </div>
+<% end %>

@@ -1,0 +1,54 @@
+<%= form_for(@money_uage) do |f| %>
+  <% if @money_uage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@money_uage.errors.count, "error") %> prohibited this money_uage from being saved:</h2>
+
+      <ul>
+      <% @money_uage.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label>Date</label><br>
+    <%= f.text_field :transaction_date, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <label>ဝင္ေငြ</label><br>
+    <%= f.text_field :income, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <label>ထြက္ေငြ</label><br>
+    <%= f.text_field :outcome, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <label>ဆိုင္ရွိေငြ</label><br>
+    <%= f.text_field :money_in_shop, :class =>"form-control" %>
+  </div>
+  <div class="form-group">
+    <label> မွတ္ခ်က္</label><br>
+    <%= f.text_area :remark, :class =>"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit :class =>"btn btn-default"%>
+  </div>
+<% end %>
+
+
+
+
+<script>
+  $(function() {
+    $( "#money_uage_transaction_date" ).datepicker();
+
+    
+  });
+
+
+
+
+ 
+  </script>

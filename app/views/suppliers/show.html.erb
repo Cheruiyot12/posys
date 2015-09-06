@@ -1,0 +1,56 @@
+
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                       <h1 class="page-header"  style="background:#99CCFF;height:80px;"><hr/>
+                     &nbsp;&nbsp; &nbsp;&nbsp;Supplier အခ်က္အလက္
+                 
+                    </h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Supplier အခ်က္အလက္
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    	
+											<p>
+											 	<strong>အမည္</strong>
+  												<%= @supplier.name %>
+											</p>
+
+											<p>
+												  <strong>ဆက္သြယ္ရန္</strong>
+												  <%= @supplier.contact %>
+											</p>
+
+											<p>
+											  <strong>ေပးရန္ရွိ</strong>
+											  <%= @supplier.debit %>
+											</p>
+
+									<%= link_to 'Edit', edit_supplier_path(@supplier), :class =>"btn btn-default" %> |
+									<%= link_to 'Back', suppliers_path, :class =>"btn btn-default" %>
+
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+

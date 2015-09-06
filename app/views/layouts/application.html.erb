@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Posys</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+  <%= javascript_include_tag "jquery.min.js" %>
+  <%= javascript_include_tag "bootstrap.js" %>
+  <%= javascript_include_tag 'angular.min.js' %>
+  <%= javascript_include_tag 'app.js' %>
+  <%= javascript_include_tag 'jquery_ujs.js' %>
+  <%= javascript_include_tag 'jquery-ui.js' %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <div id="wrapper">
+    	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">PoSys v1.1</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">မလာတာၾကာျပီျဖစ္ေသာ customer မ်ား</a></li>
+                      <li class="divider"></li>
+                      <% @noti_invoices.each do |noti_invoice| %>
+                        <li><a href="#">
+                            အမည္: <%= noti_invoice.customer_name %> <br/> 
+                            ဖုန္းနံပါတ္: <%= noti_invoice.phone_number %></a></li>
+                      <% end %>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Out of Stock 
+                    <font style="color:red;">
+                        
+
+                                <%= @num_stocks %>
+
+
+                    </font>
+                    <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Out of Stock</a></li>
+                      <li class="divider"></li>
+                      <% @noti_stocks.each do |noti_stock| %>
+                        <li><a href="#">
+                            ကုန္ပစၥည္းအမည္: <%= noti_stock.brand %> <br/> 
+                            လက္က်န္အေရအတြက္: <%= noti_stock.number_of_item %></a></li>
+                      <% end %>
+                    </ul>
+                </li>
+
+
+                
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="/">Dashboard</a>
+                        </li>
+
+                        <li>
+                              <a href="/sales"></i> Sale Force
+                              <span class="fa arrow"></span></a>
+                        </li>
+
+                        <li>
+                              <a href="/stocks"></i> Stock Control
+                              <span class="fa arrow"></span></a>
+                        </li>
+
+                        <li>
+                            <a href="/types">Item Types</a>
+                        </li>
+
+                        <li>
+                            <a href="/sale_history">Sale History
+                            <span class="fa arrow"></span></a>
+                        </li>
+
+                        <li>
+                            <a href="/sale_report">Sale Report</a>
+                        </li>
+
+                        <li>
+                            <a href="/today_sale">Today Net Sale Report</a>
+                        </li>
+
+                        <li>
+                            <a href="/purchase_histories">Purchase History
+                            <span class="fa arrow"></span></a>
+                        </li>
+
+                        <li>
+                            <a href="/money_uages">ေငြစာရင္း
+                            <span class="fa arrow"></span></a>
+                        </li>
+
+                        <li>
+                            <a href="/purchase_report">Purchase Report</a>
+                        </li>
+
+                        <li>
+                            <a href="/today_purchase">Today Net Purchase Report</a>
+                        </li>
+
+                        <li>
+                            <a href="/line_charts">Line Chart</a>
+                        </li>
+
+                        <li>
+                            <a href="/raw_materials">Raw Material Pricing</a>
+                        </li>
+
+                        <li>
+                            <a href="/customers">Customers</a>
+                        </li>
+
+                        <li>
+                            <a href="/suppliers">Suppliers</a>
+                        </li>
+                       
+                        <li>
+                            <a href="/phone_books"></i> Phone Book
+                              <span class="fa arrow"></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <%= image_tag "sinminlogo.png", :style => "position:relative;left:40px;top:10px;" %> 
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+		
+		<%= yield %>
+	</div>
+
+</body>
+</html>

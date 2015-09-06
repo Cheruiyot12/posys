@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bank transfer date:</strong>
+  <%= @bank.bank_transfer_date %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @bank.amount %>
+</p>
+
+<%= link_to 'Edit', edit_bank_path(@bank) %> |
+<%= link_to 'Back', banks_path %>

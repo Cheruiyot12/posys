@@ -1,0 +1,92 @@
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Sale History
+                    <span style="float:right;">အေရာင္းစာရင္း</span>
+                    </h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            List of Sale History
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                      <h1>List of Sale History</h1>
+                                      <table class="table table-bordered">
+                                           
+                                            <% @invoice_numbers.each do |invoice_number, items| %>  
+
+                                       
+                                             
+                                                  <td colspan="8">
+                                                           <hr/>
+                                                  <div class="well">
+                                                    Invoice Number - <%= invoice_number %>
+                                                       </div>
+                                                  </td>
+                                             
+                                             
+
+                                                <tr>  
+                                                     <th></th>
+                                                    <th>ဝယ္သူအမည္</th>
+                                                    <th>ဖုန္း</th>
+                                                    <th>ေငြေပးေခ်မႉပုံစံ</th>
+                                                    <th>အေရာင္းကုန္ပစၥည္း</th>
+                                                    <th>အေရအတြက္</th>
+                                                     <th>ေစ်းႏႈန္း</th>
+                                                    <th>InvoiceAt</th>
+                                                     <th></th>
+                                                </tr>
+
+                                                <% items.each do |item| %>
+                                             
+                                                  <tr>
+                                                    <td></td>
+                                                    <td><%= item.customer_name %></td>
+                                                    <td><%= item.phone_number %></td>
+                                                    <td><%= item.payment_type %></td>
+                                                    <td><%= item.purchase_item %></td>
+                                                    <td><%= item.count %></td>
+                                                    <td><%= item.item_price %></td>
+                                                    <td><%= item.created_at.strftime('%d%b%Y') %></td>
+                                                    <td></td>
+                                                  </tr>
+                                                <% end %>  
+
+                                            <% end %>
+                                      </table>
+
+                                      <br>
+
+                                     
+
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,184 @@
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Sale Invoice
+                    <span style="float:right;">ေဘာက္ခ်ာစာရင္း</span>
+                    </h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            List of Sale Invoice
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                      <h1>List of Sale Invoice</h1>
+                                      <table class="table table-bordered">
+                                           
+                                            <% @invoice_numbers.each do |invoice_number, items| %>  
+
+                                                <tr id="myinvoicerow">
+                                                  <td colspan="8">
+                                                    Invoice Number - <%= invoice_number %>
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal<%= invoice_number %>">
+                                                          Print Invoice
+                                                        </button>
+                                                  </td>
+                                                </tr>
+
+                                                <tr>  
+                                                    <th>Customer (အမည္)</th>
+                                                    <th>Phone (ဖုန္း)</th>
+                                                    <th>Payment (ေငြေပးေခ်မႉပုံစံ)</th>
+                                                    <th>SaleItem (အေရာင္းကုန္ပစၥည္း )</th>
+                                                    <th>Count (အေရအတြက္)</th>
+                                                    <th>InvoiceAt</th>
+                                                    <th colspan="3"></th>
+                                                </tr>
+
+                                                <% items.each do |item| %>
+                                             
+                                                  <tr>
+                                                    <td><%= item.customer_name %></td>
+                                                    <td><%= item.phone_number %></td>
+                                                    <td><%= item.payment_type %></td>
+                                                    <td><%= item.purchase_item %></td>
+                                                    <td><%= item.count %></td>
+                                                    <td><%= item.created_at.strftime('%d%b%Y') %></td>
+                                                    <td colspan="3"></td>
+                                                  </tr>
+                                                <% end %>  
+
+                                            <% end %>
+                                      </table>
+
+                                      <br>
+
+                                     
+
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+
+
+ <% @invoice_numbers.each do |invoice_number, items, payment_type| %> 
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal<%= invoice_number %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span style="text-align:center;">
+                <h4 class="modal-title" id="myModalLabel">ေရႊဇင္ေယာ္<span style="font-size:12px;"> ေရာင္းဝယ္ေရး</span></h4>
+                <span style="font-size:12px;">  ေစ်းအေနာက္ေျမာက္ေထာင့္၊ျပည့္သူေစ်း(၂)၊ေပ်ာ္ဘြယ္ျမိဳ႕။
+                    ၀၉ ၄၀၂၅၂၄၇၈၈၊
+                    ၀၉ ၄၀၂၅၂၄၇၇၄၊
+                    ၀၉ ၇၉၆၂၂၂၀၀၄</span>
+            
+            </span>
+          </div>
+
+          <div class="modal-body">
+            <% items.each do |item| %>
+             <table style="width:100%">
+
+                  <tr>
+                    <td>
+                      <span class="in_field" id="vc_no">ဝယ္သူအမည္</span>
+                    </td>
+                    <td>
+                      <%= item.customer_name %>
+                    </td>
+                    <td>
+                      <span class="in_field" id="vc_date">ရက္စြဲ</span>
+                    </td>
+                    <td>
+                        <%= item.created_at.strftime('%d-%B-%Y') %>
+                    </td>
+                  </tr>
+
+             </table><br/>
+             <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>စဥ္</th>
+                      <th>အမ်ိဳးအမည္</th>
+                      <th>ဦးေရ</th>
+                      <th>ႏႈန္း</th>
+                      <th>သင့္ေငြ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td><%= item.purchase_item %></td>
+                      <td><%= item.count %></td>
+                      <td><%= item.item_price %></td>
+                      <td></td>
+                    </tr>
+                   
+                  </tbody>
+            </table>
+
+             <table style="width:100%">
+
+                  <tr>
+                   
+                    <td>
+                      <span class="in_field" id="vc_date">ေငြေပးေခ်မႉပုံစံ</span>
+                    </td>
+                    <td>
+                       <%= item.payment_type %>
+                    </td>
+                    <td>
+                      <span class="in_field" id="vc_date">စုစုေပါင္း</span>
+                    </td>
+                    <td>
+            
+                    </td>
+                  </tr>
+
+             </table>
+                                                 
+                 
+                        
+            <% end %>  
+
+
+             
+          </div>
+
+
+          
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %> 

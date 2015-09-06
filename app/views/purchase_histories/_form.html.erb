@@ -1,0 +1,578 @@
+<%= form_for(@purchase_history) do |f| %>
+  <% if @purchase_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_history.errors.count, "error") %> prohibited this purchase_history from being saved:</h2>
+
+      <ul>
+      <% @purchase_history.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="well well-lg">
+  <div class="form-group">
+    <%= f.label :supplier_id %>
+     <%= link_to 'New Supplier', new_supplier_path, :class =>"btn btn-default btn-xs" %><br>
+    <%= f.select :supplier_id, options_for_select(@supplier_list,@purchase_history.supplier_id),  :prompt => 'Choose a Supplier' %>
+    
+  </div>
+
+ 
+
+ 
+      <div class="form-group">
+        <%= f.label :phone %><span style="color:red;"> (optional)</span><br>
+        <%= f.text_field :phone,  :class =>"form-control" %>
+      </div>
+
+
+    <div class="form-group">
+      <%= f.label :purchase_date %><br>
+      <%= f.text_field :purchase_date,  :class =>"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <label>ကုန္ေရာက္ရွိ ရက္</label><br>
+      <%= f.text_field :stock_arrival_date,  :class =>"form-control" %>
+    </div>
+
+</div>
+
+  <div class="form-group">
+
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type_id, options_for_select(@type_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td> 
+          <td>
+              <label>Purchase item</label><br/>
+              <select id="purchase_history_purchase_item" name="purchase_history[purchase_item]">
+                  <option>Choose item</option>
+              </select>
+          </td>
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count,  :class =>"form-control"%>
+          </td>
+
+          <td>
+           <label>Item price</label><br>
+            <%= f.number_field :item_price, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+     
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type1, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td> 
+          <td>
+            <label>Purchase item</label><br>
+             <select id="purchase_history_purchase_item1" name="purchase_history[purchase_item1]">
+                  <option>Choose item</option>
+              </select>
+
+          </td>
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count1,  :class =>"form-control" %>
+          </td>
+           <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price1, :class =>"form-control" %>
+          </td>
+
+
+        </tr>
+    </table>
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type2, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td>
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item2" name="purchase_history[purchase_item2]">
+                  <option>Choose item</option>
+              </select>
+          </td> 
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count2,  :class =>"form-control" %>
+          </td>
+         <td>
+           <label>Item price</label><br>
+            <%= f.number_field :item_price2, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type3, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td> 
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item3" name="purchase_history[purchase_item3]">
+                  <option>Choose item</option>
+              </select>
+          </td>
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count3,  :class =>"form-control" %>
+          </td>
+          <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price3, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+
+
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type4, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td>
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item4" name="purchase_history[purchase_item4]">
+                  <option>Choose item</option>
+              </select>
+          </td> 
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count4,  :class =>"form-control" %>
+          </td>
+
+          <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price4, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+
+
+
+<div id="show_pur" style="display:none;">
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type5, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td> 
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item5" name="purchase_history[purchase_item5]">
+                  <option>Choose item</option>
+              </select>
+          </td>
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count5,  :class =>"form-control" %>
+          </td>
+
+          <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price5, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+
+
+
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type6, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td>
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item6" name="purchase_history[purchase_item6]">
+                  <option>Choose item</option>
+              </select>
+          </td> 
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count6,  :class =>"form-control" %>
+          </td>
+          <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price6, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+
+
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type7, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td> 
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item7" name="purchase_history[purchase_item7]">
+                  <option>Choose item</option>
+              </select>
+          </td>
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count7,  :class =>"form-control" %>
+          </td>
+        <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price7, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type8, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td>
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item8" name="purchase_history[purchase_item8]">
+                  <option>Choose item</option>
+              </select>
+          </td> 
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count8,  :class =>"form-control" %>
+          </td>
+          <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price8, :class =>"form-control" %>
+          </td>
+        </tr>
+    </table>
+
+
+
+
+    <table style="width:100%">
+        <tr>
+          <td>
+             <label>Type</label><br>
+            <%= f.select :type9, options_for_select(@type_name_list,@purchase_history.type_id), {prompt: 'Choose Type'}  %>
+          </td>
+          <td>
+              <label>Purchase item</label><br>
+              <select id="purchase_history_purchase_item9" name="purchase_history[purchase_item9]">
+                  <option>Choose item</option>
+              </select>
+          </td> 
+          <td>
+            <label>Qty</label><br>
+            <%= f.number_field :count9,  :class =>"form-control" %>
+          </td>
+          <td>
+            <label>Item price</label><br>
+            <%= f.number_field :item_price9, :class =>"form-control"%>
+          </td>
+        </tr>
+    </table>
+
+  </div>
+
+<br/>
+<button type="button" id="more_purchase" class="btn btn-primary btn-lg btn-block">Add more purchase item</button>
+<br/>
+
+  <div class="form-group" style="display:none;">
+    <%= f.label :thismonth %><br>
+    <%= f.text_field :thismonth,  :value => Date.today.strftime("%B")  %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :total_cash %>
+    <button type="button" class="btn btn-default btn-xs" id="calculate">Calculate</button><br>
+    <%= f.text_field :total_cash, :class =>"form-control", :style => "display:none;" %>
+    <input id="fake_cash" class="form-control" disabled="true">
+  </div>
+
+
+  <div class="form-group">
+    <%= f.select(:payment, PurchaseHistory::PAYMENT) %>
+  </div>
+
+
+
+  <br/>
+<div class="well">
+  <div class="form-group">
+      <h4>ယခု supplier အားေပးရန္ရွိ ေငြ = <input id="mydebit" disabled="true"></h4>
+      <br/>
+      <label>ေပးေခ်မည္  ေငြ </label>
+      <input type="input" class="form-control" id="reduce_money"> 
+
+  </div>
+
+ <div class="form-group" >
+    <label>ေငြပို႕/ ေငြလႊဲသည့္ရက္</label>
+     <input type="text" id="bank_transfer_date"> 
+
+
+  &nbsp;&nbsp;&nbsp;
+  <button type="button" class="btn btn-default btn-xs" id="reduce_debit" >Submit</button>
+
+  </div>
+</div>
+  
+
+  <br/>
+  <div class="actions">
+    <%= f.submit :class =>"btn btn-default", :id => "mysub" %>
+  </div>
+<% end %>
+
+
+
+
+<script type="text/javascript">
+  
+ $('#calculate').on('click', function () {
+               
+  var item_price = document.getElementById("purchase_history_item_price").value;
+  var count = document.getElementById("purchase_history_count").value;
+
+  var item_price1 = document.getElementById("purchase_history_item_price1").value;
+  var count1 = document.getElementById("purchase_history_count1").value;
+
+  var item_price2 = document.getElementById("purchase_history_item_price2").value;
+  var count2 = document.getElementById("purchase_history_count2").value;
+
+  var item_price3 = document.getElementById("purchase_history_item_price3").value;
+  var count3 = document.getElementById("purchase_history_count3").value;
+
+  var item_price4 = document.getElementById("purchase_history_item_price4").value;
+  var count4 = document.getElementById("purchase_history_count4").value;
+
+  var item_price5 = document.getElementById("purchase_history_item_price5").value;
+  var count5 = document.getElementById("purchase_history_count5").value;
+
+  var item_price6 = document.getElementById("purchase_history_item_price6").value;
+  var count6 = document.getElementById("purchase_history_count6").value;
+
+  var item_price7 = document.getElementById("purchase_history_item_price7").value;
+  var count7 = document.getElementById("purchase_history_count7").value;
+
+  var item_price8 = document.getElementById("purchase_history_item_price8").value;
+  var count8 = document.getElementById("purchase_history_count8").value;
+
+  var item_price9 = document.getElementById("purchase_history_item_price9").value;
+  var count9 = document.getElementById("purchase_history_count9").value;
+
+
+
+  total = parseInt(item_price) * parseInt(count)+
+          parseInt(item_price1) * parseInt(count1)+
+          parseInt(item_price2) * parseInt(count2)+
+          parseInt(item_price3) * parseInt(count3)+
+          parseInt(item_price4) * parseInt(count4)+
+          parseInt(item_price5) * parseInt(count5)+
+          parseInt(item_price6) * parseInt(count6)+
+          parseInt(item_price7) * parseInt(count7)+
+          parseInt(item_price8) * parseInt(count8)+
+          parseInt(item_price8) * parseInt(count9)
+          ;
+        document.getElementById("purchase_history_total_cash").value = total;
+        document.getElementById("fake_cash").value = total;
+        
+
+               
+
+
+
+  
+          });
+
+
+  
+ $('#my_new_item').on('click', function () {
+
+
+       $("#old_form").hide();
+       $("#new_form").show();
+       $("#purchase_history_purchase_item").css('display',null);
+               
+          });
+
+ $('#my_old_item').on('click', function () {
+
+       $("#new_form").hide();
+       $("#old_form").show();
+        document.getElementById("purchase_history_purchase_item").value = "";
+               
+          });
+
+
+
+</script>
+
+
+
+
+
+      <script>
+
+            $('#payment_status').change(function(){
+                var option_value = $(this).val();
+                alert(option_value);
+                if (option_value == "cash")
+                {
+                  alert("aok");
+                }else
+                {
+                
+                  var debit = document.getElementById('3').value;
+                  alert(debit);
+
+                }
+
+              });
+
+      </script>
+
+      <script type="text/javascript">
+
+      $('#more_purchase').on('click', function () {
+              
+               $("#show_pur").show(1000);
+               
+          });
+
+
+      </script>
+
+
+     <script type="text/javascript">
+
+        $("#purchase_history_purchase_item").change(function(){
+
+          if ($(this).val() != "") {
+                 document.getElementById('purchase_history_count').style.border = '3px solid red';
+
+                  document.getElementById('purchase_history_item_price').style.border = '3px solid red';
+
+                  document.getElementById('purchase_history_type_id').style.border = '3px solid red';
+
+                 
+              }
+          else
+              {
+                document.getElementById('purchase_history_count').style.border = '1px solid grey';
+
+                document.getElementById('purchase_history_item_price').style.border = '1px solid grey';
+
+                document.getElementById('purchase_history_type_id').style.border = '1px solid grey';
+              }
+
+        });
+
+
+         $("#purchase_history_count").keyup(function(e){
+                         document.getElementById('purchase_history_count').style.border = '1px solid grey';
+                });
+
+          $("#purchase_history_item_price").keyup(function(e){
+                         document.getElementById('purchase_history_item_price').style.border = '1px solid grey';
+                });
+
+           $("#purchase_history_type_id").change(function(){
+                         document.getElementById('purchase_history_type_id').style.border = '1px solid grey';
+          });
+
+
+      </script>
+
+      <% (1..9).step(1) do |n| %>
+
+        <script type="text/javascript">
+
+            $("#purchase_history_purchase_item<%= n %>").change(function(){
+
+              if ($(this).val() != "") {
+                     document.getElementById('purchase_history_count<%= n %>').style.border = '3px solid red';
+
+                      document.getElementById('purchase_history_item_price<%= n %>').style.border = '3px solid red';
+
+                       document.getElementById('purchase_history_type<%= n %>').style.border = '3px solid red';
+
+                  }
+              else
+                  {
+                    document.getElementById('purchase_history_count<%= n %>').style.border = '1px solid grey';
+
+                    document.getElementById('purchase_history_item_price<%= n %>').style.border = '1px solid grey';
+
+                    document.getElementById('purchase_history_type<%= n %>').style.border = '1px solid grey';
+                  }
+
+            });
+
+            $("#purchase_history_count<%= n %>").keyup(function(e){
+                         document.getElementById('purchase_history_count<%= n %>').style.border = '1px solid grey';
+                });
+
+
+            $("#purchase_history_item_price<%= n %>").keyup(function(e){
+                         document.getElementById('purchase_history_item_price<%= n %>').style.border = '1px solid grey';
+                });
+
+            $("#purchase_history_type<%= n %>").change(function(){
+                         document.getElementById('purchase_history_type<%= n %>').style.border = '1px solid grey';
+          });
+
+
+       </script>
+
+
+
+
+
+      <% end %>
+
+
+    
+
+
+
+
+<script>
+  $(function() {
+    $( "#purchase_history_purchase_date" ).datepicker();
+    $( "#bank_transfer_date" ).datepicker();
+    $( "#purchase_history_stock_arrival_date" ).datepicker();
+
+    
+  });
+
+
+
+
+ 
+  </script>

@@ -1,0 +1,36 @@
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12" >
+                    <h1 class="page-header" style="background:#99CCFF;height:80px;"><hr/>
+                    &nbsp;&nbsp;Purchase History
+                      <%= link_to 'ရွိျပီးသား ကုန္ပစၥည္းထပ္မံဝယ္ယူျခင္း', new_purchase_history_path, :class =>"btn btn-default" %>
+                      <%= link_to 'ကုန္ပစၥည္းအသစ္ဝယ္ယူျခင္း', add_new_purchase_path, :class =>"btn btn-default" %>
+                      <span style="float:right;">အဝယ္စာရင္း&nbsp;</span>
+                   
+                    </h1>
+
+                    <h3 style="text-align:center;">Suppliers List</h3>
+                     <div id="supname">
+                     <% @mysuppliers.each do |mysupplier| %>
+                    
+                      <%= link_to mysupplier.name, my_supplier_path(:supplier => mysupplier.id), :class => "btn btn-default", :id=> "namebtn"  %>
+                     <% end %>
+                </div>
+                    
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+  <br/><br/><br/>        
+<%= link_to 'Back', purchase_histories_path %>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+

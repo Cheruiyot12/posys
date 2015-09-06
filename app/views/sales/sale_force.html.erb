@@ -1,0 +1,187 @@
+
+<%= javascript_include_tag 'actb.js' %>
+<%= javascript_include_tag 'common.js' %>
+<div class="panel panel-default" >
+    <div class="panel-heading" >
+        <div class="row">
+            <div class="col-xs-3">
+                <i class="fa fa-tasks fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+                <div class="huge">PoSys</div>
+                    <div>Powered By H&Ttechs</div>
+                   
+
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group custom-search-form" style="padding:20px;">
+            <input type="text" class="form-control" placeholder="ItemName here">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Find</button>
+            </span>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body"><%=  link_to image_tag("back-button.png"), sale_force_by_brand_path %>
+            <div class="list-group">
+                <% @stocks.each do |stock| %>
+                    <a href="#" class="list-group-item" data-toggle="modal" data-target="#itemModal-<%= stock.brand.gsub(/\s+/,'')  %>">
+                        <div class="huge"><%= stock.brand %></div>
+                    </a>
+                    <!-- Item Modal From -->
+                     
+                    <div class="modal fade" id="itemModal-<%= stock.brand.gsub(/\s+/,'')  %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" >
+                            <div class="panel" style="background:#f8efa7;">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-shopping-cart fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">
+
+                                            ShweZinYaw</div>
+                                            <div>Sent Item!</div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <%= form_for(@sale) do |f| %>
+                                    <div class="panel-body">
+                                        <% if @sale.errors.any? %>
+                                            <div id="error_explanation">
+                                                <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this type from being saved:</h2>
+                                                <ul>
+                                                    <% @sale.errors.full_messages.each do |message| %>
+                                                        <li><%= message %></li>
+                                                    <% end %>
+                                                </ul>
+                                            </div>
+                                        <% end %>
+                                        <div class="form-group">
+                                            <%= f.label :name %><br>
+                                            <%= f.text_field :name, :value => stock.brand , :class =>"form-control" %>
+                                        </div>
+                                        <div class="form-group" style="display:none;">
+                                            <%= f.label :item_price %><br>
+                                            <%= f.text_field :item_price, :class =>"form-control" , :id => "sale_item_price"+stock.id.to_s %>
+                                        </div>
+                                        <div class="form-group">
+                                            <%= f.label :count %><br>
+                                            <%= f.text_field :count, :class =>"form-control" %>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <%= f.label :customer_name %>
+                                                <!-- <button data-toggle="modal" data-target="#myModal" type="button">Add</button> -->
+                                                <%= f.text_field :customer_id, :id => 'tb'+ stock.id.to_s, :class =>"form-control", :value => '' %>
+                                                <div id="append_this<%= stock.id %>"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <%= f.label :sale_method %><br>
+                                                <%= f.select(:sale_method, Sale::SALE_METHOD, {prompt: 'Choose Pay Method'},{:class=>"sale_sale_method"+stock.id.to_s}) %>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <%= f.label :sale_name %><br>
+                                                <%= f.select(:sale_name, Sale::SALE_NAME, {prompt: 'Choose Your Name'})  %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="actions">
+                                            <%= f.submit "Send", :class =>"btn btn-info btn-lg btn-block", :id => "sent_invoice" %>
+                                        </div>
+                                    </div>
+                                <% end %>
+                                <div style="display:none;">
+                                <input id="retail<%= stock.id %>" value="<%= stock.item_price %>" />
+                                <input id="whole<%= stock.id %>" value="<%= stock.wholesale_price %>" />
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+
+
+
+                    <script>
+                        var customerarray=[];
+                        <% @customers.each do |customer| %>
+                            customerarray.push("<%= customer.name %>");
+                        <% end %>
+                        var obj = actb(document.getElementById('tb<%= stock.id %>'),customerarray,<%= stock.id %>);
+                    </script>
+
+                   
+
+
+
+
+
+
+                <% end %>
+            </div>
+            <!-- /.list-group -->
+            <a href="/sale_force" class="btn btn-default btn-block">View All Items</a>
+        </div>
+    <!-- /.panel-body -->
+</div>
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Create New Customer
+            </div>
+            <div class="modal-body">
+                <%= render 'customers/customer_new' %>
+            </div>
+
+        </div> -->
+        <!-- /.modal-content -->
+    <!-- </div> -->
+    <!-- /.modal-dialog -->
+<!-- </div> -->
+<!-- /.modal -->
+
+
+<script type="text/javascript">
+$( "#sent_invoice" ).click(function() {
+  alert( "sucessfully sent to server" );
+
+});
+
+
+
+
+</script>
+
+
+
+<% @stocks.each do |stock| %>
+    <script type="text/javascript">
+    
+                   
+                            $(".sale_sale_method<%= stock.id %>").change(function(){
+                                if($(this).val() == "WholeSale")
+                                    {
+                                        document.getElementById("sale_item_price<%= stock.id %>").value = document.getElementById("whole<%= stock.id %>").value ;
+
+                                    } else if ($(this).val() == "Retail")
+                                    {
+                                        document.getElementById("sale_item_price<%= stock.id %>").value = document.getElementById("retail<%= stock.id %>").value ;
+
+                                    }
+
+                                });
+                   
+        </script>
+<% end %>

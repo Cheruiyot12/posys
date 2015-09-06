@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  supplier_id: 1
+  phone: MyString
+  payment: MyString
+  purchase_item: MyString
+  count: MyString
+  voucher_no: MyString
+
+two:
+  supplier_id: 1
+  phone: MyString
+  payment: MyString
+  purchase_item: MyString
+  count: MyString
+  voucher_no: MyString

@@ -1,0 +1,29 @@
+<%= form_for(@line_chart) do |f| %>
+  <% if @line_chart.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@line_chart.errors.count, "error") %> prohibited this line_chart from being saved:</h2>
+
+      <ul>
+      <% @line_chart.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :month_name %><br>
+        <%= f.select(:month_name, LineChart::MONTHS) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :year %><br>
+    <%= f.text_field :year, :class =>"form-control", :placeholder => "2015"  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :total_income %><br>
+    <%= f.text_field :total_income, :class =>"form-control"  %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class =>"btn btn-default" %>
+  </div>
+<% end %>

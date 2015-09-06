@@ -1,0 +1,284 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">list of sales to confirm
+         
+            <a href="/sales" class="btn btn-primary btn-lg active" role="button">Refresh</a>
+            <span style="float:right;">အေရာင္း စီမံခန္႕ခြဲျခင္း</span></h1>
+           
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    List of Sales
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <h1>Sales
+                                    <span id="notice" style="color:red;"><%= notice %></span>
+                                        <!-- <button id="get_invoice" data-toggle="modal" data-target="#myModal" type="button" style="float:right;" class="btn btn-lg btn-primary">Produce Invoice Now</button> -->
+                                        <%= link_to "Product Invoice Now", invoice_print_path, :class => "btn btn-info", :style => "float:right;"%>
+                                      </h1>
+                            <br/>
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Date</th>
+                                        <th>Customer Name</th>
+                                        <th>Name</th>
+                                        <th>Count</th>
+                                        <th>Sale Method</th>
+                                        <th>Sale Name</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% @sales.each do |sale| %>
+                                        <% if sale.status== "confirm" %>
+                                            <tr>
+                                                <td>
+                                                   <% if sale.check== true %>
+                                                      <input class="mycheck" type="checkbox" id="<%= sale.id %>sale_check" value="test1" name="test1" value="1" checked />
+                                                   <% else %>
+                                                      <input class="mycheck" type="checkbox" id="<%= sale.id %>sale_check" value="test1" name="test1" value="1" />
+                                                  <% end %>
+                                                </td>
+                                                <td>
+                                                    <div class="invoice_field">
+                                                        <p style="padding:15px;">
+                                                            <%=sale.created_at.strftime( "%d/%b/%Y") %>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="invoice_field">
+                                                        <p id="sale_name<%= sale.id %>" style="padding:15px;" value="<%= sale.name %>">
+                                                            <%=sale.customer_id %>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="invoice_field">
+                                                        <p style="padding:15px;">
+                                                            <%=sale.name %>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="invoice_field">
+                                                        <p style="padding:15px;">
+                                                            <%=sale.count %> 
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="invoice_field">
+                                                        <p style="padding:15px;">
+                                                            <%=sale.sale_method %> 
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="invoice_field">
+                                                        <p style="padding:15px;">
+                                                            <%=sale.sale_name %> 
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="delete_invoice">
+                                                        <p style="padding:15px;">
+                                                            <%=link_to 'Destroy', sale, method: :delete, :style=> "color:white;", data: { confirm: 'Are you sure?' } %>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                      <div class="delete_invoice">
+                                                          <p style="padding:15px;">
+                                                              <%= link_to ' cancel', 
+                                                          readd_in_stock_path(sale), 
+                                                          method: :put, 
+                                                          :style => "color:white;", 
+                                                          :class =>"fa fa-check-circle-o", 
+                                                          data: { confirm: 'Are you sure you want to confirm?' } %>
+                                                          </p>
+                                                      </div>
+                                                </td>
+                                            </tr>
+                                            <% else %>
+                                                <tr>
+                                                    <td>
+                                                       <% if sale.check== true %>
+                                                          <input class="mycheck" type="checkbox" id="<%= sale.id %>sale_check" value="test1" name="test1" value="1" checked />
+                                                       <% else %>
+                                                          <input class="mycheck" type="checkbox" id="<%= sale.id %>sale_check" value="test1" name="test1" value="1" />
+                                                      <% end %>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="invoice_bfield">
+                                                            <p style="padding:15px;">
+                                                                <%=sale.created_at.strftime( "%d/%b/%Y") %>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="invoice_bfield">
+                                                            <p style="padding:15px;">
+                                                                <%=sale.customer_id %>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="invoice_bfield">
+                                                            <p id="sale_name<%= sale.id %>" style="padding:15px;" value="<%= sale.name %>">
+                                                                <%=sale.name %>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="invoice_bfield">
+                                                            <p style="padding:15px;">
+                                                                <%=sale.count %>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="invoice_bfield">
+                                                            <p style="padding:15px;">
+                                                                <%=sale.sale_method %> 
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="invoice_bfield">
+                                                            <p style="padding:15px;">
+                                                                <%=sale.sale_name %> 
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="delete_invoice">
+                                                            <p style="padding:15px;">
+                                                                <%=link_to 'Destroy', sale, method: :delete, :style=> "color:white;", data: { confirm: 'Are you sure?' } %>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                      <div class="delete_invoice">
+                                                          <p style="padding:15px;">
+                                                              <%= link_to ' check for availability', 
+                                                          check_in_stock_path(sale), 
+                                                          method: :put, 
+                                                          :style => "color:white;", 
+                                                          :class =>"fa fa-check-circle-o", 
+                                                          data: { confirm: 'Are you sure you want to confirm?' } %>
+                                                          </p>
+                                                      </div>
+                                                    </td>
+                                                </tr>
+                                                <% end %>
+                                                    <% end %>
+                                </tbody>
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+
+
+
+<!-- invoice pop up -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" style="text-align:center;">ေ႐ႊဇင္​​ေယာ္​ ​<span style="font-size:12px;">ေရာင္​းဝယ္​​ေရး</span><br/>
+            
+                </h4>    
+                <p style="text-align:center;font-size:12px;">​
+                    ေစ်းအေနာက္ေျမာက္ေထာင့္၊ျပည့္သူေစ်း(၂)၊ေပ်ာ္ဘြယ္ျမိဳ႕။
+                    ၀၉ ၄၀၂၅၂၄၇၈၈၊
+                    ၀၉ ၄၀၂၅၂၄၇၇၄၊
+                    ၀၉ ၇၉၆၂၂၂၀၀၄
+                </p>
+            </div>
+            <div class="modal-body">
+                <%= render 'invoices/index' %>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<% @sales.each do |sale| %>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#<%= sale.id %>sale_check').change(function() {
+                if ($(this).prop('checked')) {
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/invoices",
+                        data: {
+                            invoice: {
+                                invoice_status: "aok",
+                                invoice_number: "<%=  Time.now.strftime('%y%m%d%I%M%S') %>",
+                                purchase_item: "<%= sale.name %>",
+                                sale_id: "<%= sale.id %>",
+                                count: "<%= sale.count %>",
+                                customer_name: "<%= sale.customer_id %>",
+                                item_price: "<%= sale.item_price %>"
+                            }
+                        },
+                    });
+
+                    $.ajax({
+                        url: "/sales/" + "<%= sale.id %>",
+                        type: "delete",
+                        dataType: "json"
+                    });
+                    location.reload();
+                } else {
+                    alert("not check"); //not checked
+                }
+            });
+        });
+    </script>
+
+    <% end %>
+

@@ -1,0 +1,24 @@
+<div class="panel panel-default" >
+  <div class="panel-heading" >
+    <div class="row">
+        <div class="col-xs-3">
+            <i class="fa fa-tasks fa-5x"></i>
+        </div>
+        <div class="col-xs-9 text-right">
+            <div class="huge">PoSys</div>
+            <div>Powered By H&Ttechs</div>
+        </div>
+    </div>
+  </div>
+  <!-- /.panel-heading -->
+  <div class="panel-body"> <%=  link_to image_tag("back-button.png"), sale_force_by_type_path %>
+      <div class="list-group">
+          <% @stocks.each do |stock| %>
+              <a data-method="get" href="/sale_force?brand=<%= stock.brand %>"class="list-group-item">
+                  <div class="huge"><%= stock.brand rescue "-" %></div>
+              </a>
+          <% end %>
+      </div>
+    <a href="/sale_force_by_brand" class="btn btn-default btn-block">View All Types</a>
+  </div>
+</div>

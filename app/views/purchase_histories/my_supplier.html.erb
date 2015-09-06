@@ -1,0 +1,363 @@
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+
+                  <h1 class="page-header" style="background:#99CCFF;height:80px;"><hr/>
+                    &nbsp;&nbsp;
+                     <% @supplier_names.each do |supplier_name| %>
+                       <%= supplier_name.name rescue "-" %>
+                     <% end %> ၏ အဝယ္စာရင္း
+                   
+                    </h1>
+
+                    
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            List of Purchase History
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                      <div class="well well-lg">                            
+                                          <% @supplier_debits.each do |supplier_debit| %>
+                                          <% if supplier_debit.debit.nil? %>
+                                               <p>
+                                                <strong>ေပးရန္ရွိ = </strong>
+                                                0
+                                              </p>
+                                               <p>
+                                                  <strong>ရရန္ရွိ = </strong>
+                                                  0
+                                                </p>
+                                           <% else %>
+                                             <% if supplier_debit.debit.include? "-" %>
+                                              <p>
+                                                <strong>ေပးရန္ရွိ = </strong>
+                                                0
+                                              </p>
+                                              <p>
+                                                <strong>ရရန္ရွိ = </strong>
+                                                <%= supplier_debit.debit.gsub("-","")  rescue "-"  %>
+                                              </p>
+                                             <% else %>
+                                                <p>
+                                                  <strong>ေပးရန္ရွိ = </strong>
+                                                  <%= supplier_debit.debit rescue "-" %>
+                                                </p>
+                                                <p>
+                                                  <strong>ရရန္ရွိ = </strong>
+                                                  0
+                                                </p>
+                                            <% end %>
+                                            <% end %>
+                                          <% end %>
+                                        </div>
+
+                                  <h1 style="background:#99CCFF;height:80px;"><hr/>
+                    &nbsp;&nbsp;ဘဏ္မွ ေငြလႊဲ စာရင္း
+                   
+                    </h1>
+
+
+
+                                        <div class="well well-lg">                            
+                                          <% @banks.each do |bank| %>
+                                            <p>
+                                                <strong>Bank Transfer Date:</strong>
+                                               <%= bank.bank_transfer_date rescue "-" %>
+
+                                                <strong>Amount:</strong>
+                                                 <%= bank.amount rescue "-" %>
+
+                                            </p>
+                                          <% end %>
+
+                                        </div>
+                                    
+                                      <h1>Lists of Purchase History</h1>
+
+                                        <% @purchase_histories.each do |purchase_history| %>
+
+                                        <div class="well well-lg">                            
+                                            <p>
+                                                <strong>Supplier:</strong>
+                                                <%= purchase_history.supplier.name rescue "-" %>
+
+                                                <strong>Phone:</strong>
+                                                <%= purchase_history.phone %>
+
+                                              <span style="float:right;">
+
+                                                 <strong>Total cash:</strong>
+                                                <%= purchase_history.total_cash %>
+
+                                                <strong>Payment:</strong>
+                                                <%= purchase_history.payment %>
+
+                                                <strong>Purchase Date:</strong>
+                                                <%= purchase_history.purchase_date %>
+
+                                                <strong>ကုန္ေရာက္ရွိ ရက္</strong>
+                                                <%= purchase_history.stock_arrival_date %>
+
+                                              </span>
+                                            </p>
+                                        </div>
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                              <tr>
+                                                <th>Purchase Item</th>
+                                                <th>Type</th>
+                                                <th>Quantity</th>
+                                                <th>Item Price</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td>
+                                                   <% if purchase_history.new_purchase_item != "nil" %>
+                                                      <%= purchase_history.new_purchase_item %>
+                                                   <% end %>
+                                                   <% if purchase_history.purchase_item != "nil" %>
+                                                       <div><%= purchase_history.purchase_item %></div>
+                                                       <div><%= purchase_history.purchase_item1 unless purchase_history.purchase_item1 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item2 unless purchase_history.purchase_item2 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item3 unless purchase_history.purchase_item3 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item4 unless purchase_history.purchase_item4 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item5 unless purchase_history.purchase_item5 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item6 unless purchase_history.purchase_item6 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item7 unless purchase_history.purchase_item7 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item8 unless purchase_history.purchase_item8 == "Choose item" %></div>
+                                                       <div><%= purchase_history.purchase_item9 unless purchase_history.purchase_item9 == "Choose item" %></div>
+                                                   <% end %>
+
+
+                                                </td>
+                                                <td>
+                                                    <div><%= purchase_history.type.name rescue "" %></div>
+                                                    <div><%= purchase_history.type1 %></div>
+                                                    <div><%= purchase_history.type2 %></div>
+                                                    <div><%= purchase_history.type3 %></div>
+                                                    <div><%= purchase_history.type4 %></div>
+                                                    <div><%= purchase_history.type5 %></div>
+                                                    <div><%= purchase_history.type6 %></div>
+                                                    <div><%= purchase_history.type7 %></div>
+                                                    <div><%= purchase_history.type8 %></div>
+                                                    <div><%= purchase_history.type9 %></div>
+                                                </td>
+                                                <td>
+                                                     <div>
+                                                       <% if purchase_history.count == 0 %>
+                                                       
+                                                       <% else %>
+                                                        <%= purchase_history.count %>
+                                                       <% end %>
+                                                     </div>   
+
+                                                     <div>
+                                                       <% if purchase_history.count1 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count1 %>
+                                                       <% end %>
+                                                     </div>
+
+                                                      <div>
+                                                       <% if purchase_history.count2 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count2 %>
+                                                       <% end %>
+                                                     </div>
+
+                                                     <div>
+                                                       <% if purchase_history.count3 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count3 %>
+                                                       <% end %>
+                                                     </div>
+
+                                                    <div>
+                                                       <% if purchase_history.count4 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count4 %>
+                                                       <% end %>
+                                                     </div>
+
+                                                    <div>
+                                                       <% if purchase_history.count5 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count5 %>
+                                                       <% end %>
+                                                    </div>
+
+                                                    <div>
+                                                       <% if purchase_history.count6 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count6 %>
+                                                       <% end %>
+                                                    </div>
+
+                                                    <div>
+                                                       <% if purchase_history.count7 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count7 %>
+                                                       <% end %>
+                                                    </div>
+
+                                                    <div>
+                                                       <% if purchase_history.count8 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count8 %>
+                                                       <% end %>
+                                                    </div>
+
+                                                    <div>
+                                                       <% if purchase_history.count9 == "0" %>
+                                                       
+                                                       <% else %>
+                                                       <%= purchase_history.count9 %>
+                                                       <% end %>
+                                                    </div>
+                                        
+
+                                                </td>
+                                                <td> 
+                                                      <div>
+                                                        <% if purchase_history.item_price == 0 %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price %>
+                                                       <% end %>
+                                                      </div> 
+
+                                                      <div>
+                                                        <% if purchase_history.item_price1 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price1 %>
+                                                       <% end %>
+                                                      </div> 
+
+                                                      <div>
+                                                        <% if purchase_history.item_price2 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price2 %>
+                                                       <% end %>
+                                                      </div> 
+
+                                                      <div>
+                                                        <% if purchase_history.item_price3 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price3 %>
+                                                       <% end %>
+                                                      </div> 
+
+
+                                                      <div>
+                                                        <% if purchase_history.item_price4 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price4 %>
+                                                       <% end %>
+                                                      </div> 
+
+
+                                                      <div>
+                                                        <% if purchase_history.item_price5 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price5 %>
+                                                       <% end %>
+                                                      </div> 
+
+
+                                                      <div>
+                                                        <% if purchase_history.item_price6 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price6 %>
+                                                       <% end %>
+                                                      </div> 
+
+                                                      <div>
+                                                        <% if purchase_history.item_price7 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price7 %>
+                                                       <% end %>
+                                                      </div> 
+
+                                                      <div>
+                                                        <% if purchase_history.item_price8 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price8 %>
+                                                       <% end %>
+                                                      </div> 
+
+
+                                                     <div>
+                                                        <% if purchase_history.item_price9 == "0" %>
+                                                       
+                                                        <% else %>
+                                                        <%= purchase_history.item_price9 %>
+                                                       <% end %>
+                                                      </div> 
+
+
+
+                                                </td>
+                                              </tr>
+
+                                           
+                                            </tbody>
+                                    </table>
+
+<hr/>
+
+
+                                        <% end %>
+                                   
+<%= link_to 'Back', purchase_histories_path %>
+
+                                      <br>
+
+                     
+
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+<div ng-app="plunker">
+   <div ng-controller="MainCtrl">
+      <div id="page-wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"  style="background:#99CCFF;height:80px;"><hr/>
+                     &nbsp;&nbsp; &nbsp;&nbsp;Supplier စာရင္း
+                 
+                    </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+         </div>
+         <!-- /.row -->
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     List of Supplier
+                  </div>
+                  <div class="panel-body">
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <h1>Lists of Supplier information</h1>
+                           <div ng-init="suppliers = <%= @suppliers.to_json %>">
+                           </div>
+                           <!-- filter with name -->
+                       
+                              <input  ng-model="supplier.name" type="text" class="form-control input-lg" placeholder="By Name">
+                           <br/>
+                           <table class="table table-bordered">
+                              <thead>
+                                 <tr>
+                                    <th>အမည္</th>
+                                    <th>ဆက္သြယ္ရန္</th>
+                                    <th>ေပးရန္ရွိ</th>
+                                    <th colspan="3"></th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="supplier in suppliers | filter:{name:  supplier.name}">
+                                    <td>{{supplier.name}}</td>
+                                    <td>{{supplier.contact}}</td>
+                                    <td>{{supplier.debit}}</td>
+                                    <td> 
+                                       <a class="btn btn-primary btn-sm" href="/suppliers/{{supplier.id}}">Show</a>
+                                       <a class="btn btn-warning btn-sm" href="/suppliers/{{supplier.id}}/edit">Edit</a>
+                                       <a class="btn btn-danger btn-sm" data-confirm="Are you sure?" data-method="delete" href="/suppliers/{{supplier.id}}" rel="nofollow">Destroy</a>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <br>
+                           <%= link_to  'New Supplier', new_supplier_path, :class=>"btn btn-default" %>
+                        </div>
+                     </div>
+                     <!-- /.row (nested) -->
+                  </div>
+                  <!-- /.panel-body -->
+               </div>
+               <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+</div>

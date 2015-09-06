@@ -1,0 +1,70 @@
+
+<div ng-app="plunker">
+   <div ng-controller="MainCtrl">
+      <div id="page-wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Customer
+                     <span style="float:right;">ဝယ္သူစာရင္း</span>
+                </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+         </div>
+         <!-- /.row -->
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     List of Customers
+                  </div>
+                  <div class="panel-body">
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <h1>Lists of Customers</h1>
+                           <div ng-init="customers = <%= @customers.to_json %>">
+                           </div>
+                           <!-- filter with name -->
+                       
+                              <input  ng-model="customer.name" type="text" class="form-control input-lg" placeholder="By Name">
+                           <br/>
+                           <table class="table table-bordered">
+                              <thead>
+                                 <tr>
+                                      <th>အမည္</th>
+                                      <th>ေနရပ္လိပ္စာ</th>
+                                      <th>ရရန္ရွိေငြ</th>
+                                      <th colspan="3"></th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="customer in customers | filter:{name:  customer.name}">
+                                    <td>{{customer.name}}</td>
+                                    <td>{{customer.contact}}</td>
+                                    <td>{{customer.to_get}}</td>
+                                    <td> 
+                                       <a class="btn btn-primary btn-sm" href="/customers/{{customer.id}}">Show</a>
+                                       <a class="btn btn-warning btn-sm" href="/customers/{{customer.id}}/edit">Edit</a>
+                                       <a class="btn btn-danger btn-sm" data-confirm="Are you sure?" data-method="delete" href="/customers/{{customer.id}}" rel="nofollow">Destroy</a>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <br>
+                          <%= link_to  'New Customer', new_customer_path, :class=>"btn btn-default" %>
+                        </div>
+                     </div>
+                     <!-- /.row (nested) -->
+                  </div>
+                  <!-- /.panel-body -->
+               </div>
+               <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+</div>
+
+
